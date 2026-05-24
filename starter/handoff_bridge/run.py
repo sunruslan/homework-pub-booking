@@ -122,7 +122,7 @@ def _build_fake_client_two_rounds() -> FakeLLMClient:
 
 
 async def run_scenario(real: bool) -> int:
-    with example_sessions_dir("ex7-handoff-bridge", persist=real) as sessions_root:
+    with example_sessions_dir("ex7-handoff-bridge", persist=True) as sessions_root:
         session = create_session(
             scenario="ex7-handoff-bridge",
             task="Book a venue for 12 people in Haymarket, Friday 19:30.",

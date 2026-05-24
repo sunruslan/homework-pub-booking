@@ -6,7 +6,7 @@ Usage:
 
 What's different from a pure scaffold:
   * `Config.from_env()` is used for --real mode so your `.env` models win
-  * `example_sessions_dir()` gives us tempdir-offline, persistent-real
+  * `example_sessions_dir(..., persist=True)` keeps sessions under SOVEREIGN_AGENT_DATA_DIR
   * A preflight checks whether your TODOs are implemented and prints
     a friendly message instead of letting the framework crash cryptically
 """
@@ -195,7 +195,7 @@ async def run_scenario(real: bool) -> int:
     # populate _TOOL_CALL_LOG before the real scenario runs.
     clear_log()
 
-    with example_sessions_dir("ex5-edinburgh-research", persist=real) as sessions_root:
+    with example_sessions_dir("ex5-edinburgh-research", persist=True) as sessions_root:
         session = create_session(
             scenario="edinburgh-research",
             task=(

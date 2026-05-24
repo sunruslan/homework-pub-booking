@@ -36,7 +36,7 @@ from starter.rasa_half.structured_half import (
 
 
 async def run_scenario(real: bool, auto: bool) -> int:
-    with example_sessions_dir("ex6-rasa-half", persist=real) as sessions_root:
+    with example_sessions_dir("ex6-rasa-half", persist=True) as sessions_root:
         session = create_session(
             scenario="ex6-rasa",
             task="Confirm a booking through the Rasa structured half.",
