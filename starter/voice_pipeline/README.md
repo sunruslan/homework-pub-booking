@@ -1,8 +1,7 @@
 # Ex8 — Voice pipeline
 
 **You are building:** a conversational interface to a Llama-3.3-70B pub manager
-persona, with real voice (Speechmatics STT + ElevenLabs TTS) or text-only
-fallback.
+persona, with real voice (ElevenLabs STT + TTS) or text-only fallback.
 
 **Spec:** see `ASSIGNMENT.md` §Ex8.
 
@@ -12,8 +11,8 @@ fallback.
 
 - **Text mode** (`--text`, default): stdin/stdout. Zero extra setup. Full
   credit for this mode alone is 16/20.
-- **Voice mode** (`--voice`): real audio via Speechmatics + ElevenLabs.
-  Requires `SPEECHMATICS_KEY` in `.env`. Full credit is 20/20.
+- **Voice mode** (`--voice`): mic → ElevenLabs Scribe STT → manager → ElevenLabs TTS.
+  Requires `ELEVENLABS_API_KEY` in `.env`. Full credit is 20/20.
 
 ## Files
 
@@ -26,8 +25,9 @@ fallback.
 ## How to run
 
 ```
-make ex8-text        # text mode
-make ex8-voice       # voice mode; falls back to text if SPEECHMATICS_KEY missing
+make setup-voice     # once: elevenlabs + sounddevice
+make ex8-text        # text mode (free)
+make ex8-voice       # voice mode; falls back to text if ELEVENLABS_API_KEY missing
 ```
 
 ## Grading shape

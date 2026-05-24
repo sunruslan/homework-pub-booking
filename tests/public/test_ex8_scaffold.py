@@ -1,7 +1,7 @@
 """Public tests for Ex8 — voice pipeline.
 
 Text mode is tested here end-to-end with a scripted manager. Voice
-mode (real Speechmatics) is only tested in CI if SPEECHMATICS_KEY is set.
+mode (real ElevenLabs) is only tested in CI if ELEVENLABS_API_KEY is set.
 """
 
 from __future__ import annotations
@@ -58,15 +58,15 @@ async def test_text_mode_appends_trace_events(tmp_path, monkeypatch) -> None:
 
 
 @pytest.mark.asyncio
-async def test_voice_mode_falls_back_when_no_speechmatics_key(tmp_path, monkeypatch) -> None:
-    """--voice without SPEECHMATICS_KEY should not crash — it falls back to text."""
+async def test_voice_mode_falls_back_when_no_elevenlabs_key(tmp_path, monkeypatch) -> None:
+    """--voice without ELEVENLABS_API_KEY should not crash — it falls back to text."""
     import io
 
     from sovereign_agent.session.directory import create_session
 
     from starter.voice_pipeline.manager_persona import ManagerTurn
 
-    monkeypatch.delenv("SPEECHMATICS_KEY", raising=False)
+    monkeypatch.delenv("ELEVENLABS_API_KEY", raising=False)
 
     class StubPersona:
         history: list[ManagerTurn] = []

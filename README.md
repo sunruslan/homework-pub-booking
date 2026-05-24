@@ -268,15 +268,15 @@ make setup-voice
 # Then: System Settings → Privacy & Security → Microphone → grant terminal access
 ```
 
-**Get API keys** from https://portal.speechmatics.com and https://rime.ai.
-Add `SPEECHMATICS_KEY` and `RIME_API_KEY` to `.env`.
+**Get an API key** from https://elevenlabs.io (Profile → API Keys).
+Add `ELEVENLABS_API_KEY` to `.env`.
 
 Implement `run_voice_mode` in `starter/voice_pipeline/voice_loop.py`:
 
 - Mic capture via `sounddevice`
-- Speechmatics real-time STT over websocket
+- ElevenLabs Scribe STT (batch upload of each utterance)
 - Pub-manager reply from Llama-3.3 via `manager_persona.py`
-- Rime Arcana TTS → MP3 → pydub decode → sounddevice playback
+- ElevenLabs TTS (`pcm_16000`) → sounddevice playback
 
 **Run:**
 

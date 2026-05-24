@@ -65,11 +65,11 @@ help: ## Structured help — your actual starting point
 	@echo ''
 	@echo '  ${GREEN}Ex8${RESET}  — Voice pipeline ${DIM}${RESET}'
 	@echo '      ${CYAN}make ex8-text${RESET}            text mode (free, no mic)'
-	@echo '      ${CYAN}make ex8-voice${RESET}           real Speechmatics + Rime (needs setup-voice + mic)'
+	@echo '      ${CYAN}make ex8-voice${RESET}           real ElevenLabs STT+TTS (needs setup-voice + mic)'
 	@echo ''
 	@echo '${YELLOW}${BOLD}🔧 OPTIONAL INSTALLS${RESET} ${DIM}(install only when you reach that exercise)${RESET}'
 	@echo '  ${CYAN}make setup-rasa${RESET}              rasa-pro for Ex6 (~400MB, ~2min)'
-	@echo '  ${CYAN}make setup-voice${RESET}             speechmatics + sounddevice + pydub for Ex8 voice'
+	@echo '  ${CYAN}make setup-voice${RESET}             elevenlabs + sounddevice for Ex8 voice'
 	@echo ''
 	@echo '${YELLOW}${BOLD}🎭 RASA (Ex6 ONLY)${RESET} ${DIM}three terminals — read docs/rasa-setup.md first${RESET}'
 	@echo '  ${DIM}Terminal 1:${RESET} ${CYAN}make rasa-actions${RESET}      action server on :5055'
@@ -210,13 +210,13 @@ setup-rasa: ## Install rasa-pro + deps (needed for Ex6 tier 2 and 3)
 	@echo "✓ rasa-pro installed. You can now run: make rasa-actions / make rasa-serve"
 
 .PHONY: setup-voice
-setup-voice: ## Install speechmatics + rime TTS + mic deps (needed for Ex8 voice mode)
-	@echo "▶ Installing voice deps (speechmatics, sounddevice, pydub)..."
+setup-voice: ## Install httpx + sounddevice for Ex8 voice (ElevenLabs REST API)
+	@echo "▶ Installing voice deps (httpx, sounddevice)..."
 	@echo "   Requires portaudio. On macOS: brew install portaudio"
 	@$(UV) sync --extra voice
 	@echo ""
 	@echo "✓ voice deps installed. For Ex8 voice mode you still need:"
-	@echo "    - SPEECHMATICS_KEY + RIME_API_KEY in .env"
+	@echo "    - ELEVENLABS_API_KEY in .env"
 	@echo "    - macOS: System Settings → Privacy & Security → Microphone"
 	@echo "             → grant your terminal app access"
 	@echo "    - Then: make ex8-voice"
@@ -315,7 +315,7 @@ ex8-text: ## Run Ex8 (voice pipeline) in TEXT-ONLY mode — no Speechmatics need
 	@$(UV) run python -m starter.voice_pipeline.run --text
 
 .PHONY: ex8-voice
-ex8-voice: ## Run Ex8 with real STT/TTS — requires SPEECHMATICS_KEY
+ex8-voice: ## Run Ex8 with real STT/TTS — requires ELEVENLABS_API_KEY
 	@$(UV) run python -m starter.voice_pipeline.run --voice
 
 .PHONY: ex9
