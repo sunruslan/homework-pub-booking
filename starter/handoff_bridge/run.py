@@ -10,6 +10,7 @@ import sys
 
 from sovereign_agent._internal.llm_client import (
     FakeLLMClient,
+    OpenAICompatibleClient,
     ScriptedResponse,
     ToolCall,
 )
@@ -22,6 +23,26 @@ from sovereign_agent.session.directory import create_session
 from starter.edinburgh_research.tools import build_tool_registry
 from starter.handoff_bridge.bridge import HandoffBridge
 from starter.rasa_half.structured_half import RasaStructuredHalf, spawn_mock_rasa
+
+EX7_TASK = """Book a venue for 12 people in Haymarket, Edinburgh, Friday 2026-04-25 at 19:30.
+
+WORKFLOW (loop half only — every planner subgoal MUST use assigned_half: "loop"):
+1. venue_search — if nothing fits 12 in Haymarket, try Old Town or reduce party_size
+2. handoff_to_structured — REQUIRED; the bridge will not call Rasa without it
+
+handoff_to_structured MUST include a "data" object with ALL of:
+  - venue_id: from search (e.g. "royal_oak", "Haymarket Tap")
+  - date: "2026-04-25"
+  - time: "19:30"
+  - party_size: int or str (<= 8 for auto-confirm)
+  - deposit: "£0" or 0
+
+Do NOT create planner subgoals with assigned_half "structured". That triggers an automatic
+handoff with no booking fields and fails validation.
+
+If structured rejects (party_too_large, deposit_too_high), search again and hand off with
+a revised booking (party_size <= 8, deposit <= £300).
+"""
 
 
 def _build_fake_client_two_rounds() -> FakeLLMClient:
@@ -125,7 +146,7 @@ async def run_scenario(real: bool) -> int:
     with example_sessions_dir("ex7-handoff-bridge", persist=True) as sessions_root:
         session = create_session(
             scenario="ex7-handoff-bridge",
-            task="Book a venue for 12 people in Haymarket, Friday 19:30.",
+            task=EX7_TASK,
             sessions_dir=sessions_root,
         )
         print(f"Session {session.session_id}")
@@ -136,14 +157,33 @@ async def run_scenario(real: bool) -> int:
         if not real:
             server, _thread, mock_url = spawn_mock_rasa(port=5906)
             rasa_half = RasaStructuredHalf(rasa_url=mock_url)
+            print("  Rasa: mock server (offline)")
         else:
             rasa_half = RasaStructuredHalf()
+            print("  Rasa: localhost:5005 (live — needs make rasa-actions + make rasa-serve)")
 
-        client = _build_fake_client_two_rounds()
+        if real:
+            from sovereign_agent.config import Config
+
+            cfg = Config.from_env()
+            print(f"  LLM: {cfg.llm_base_url} (live)")
+            print(f"  planner:  {cfg.llm_planner_model}")
+            print(f"  executor: {cfg.llm_executor_model}")
+            client = OpenAICompatibleClient(
+                base_url=cfg.llm_base_url,
+                api_key_env=cfg.llm_api_key_env,
+            )
+            planner_model = cfg.llm_planner_model
+            executor_model = cfg.llm_executor_model
+        else:
+            print("  LLM: FakeLLMClient (offline, scripted)")
+            client = _build_fake_client_two_rounds()
+            planner_model = executor_model = "fake"
+
         tools = build_tool_registry(session)
         loop_half = LoopHalf(
-            planner=DefaultPlanner(model="fake", client=client),
-            executor=DefaultExecutor(model="fake", client=client, tools=tools),  # type: ignore[arg-type]
+            planner=DefaultPlanner(model=planner_model, client=client),
+            executor=DefaultExecutor(model=executor_model, client=client, tools=tools),  # type: ignore[arg-type]
         )
         bridge = HandoffBridge(
             loop_half=loop_half,
@@ -152,7 +192,7 @@ async def run_scenario(real: bool) -> int:
         )
 
         try:
-            result = await bridge.run(session, {"task": "book for party of 12 in Haymarket"})
+            result = await bridge.run(session, {"task": EX7_TASK})
         finally:
             if server is not None:
                 server.shutdown()
@@ -160,6 +200,12 @@ async def run_scenario(real: bool) -> int:
         print(f"\nBridge outcome: {result.outcome}")
         print(f"  rounds: {result.rounds}")
         print(f"  summary: {result.summary}")
+
+        if real:
+            print(f"\nArtifacts persist at: {session.directory}")
+            print(f'Inspect with: ls -R "{session.directory}"')
+            print(f"📜 Narrate this run: make narrate SESSION={session.session_id}")
+
         return 0 if result.outcome == "completed" else 1
 
 

@@ -49,6 +49,48 @@ def test_build_forward_handoff_produces_valid_handoff() -> None:
         assert handoff.data
 
 
+def test_validate_booking_handoff_requires_core_fields() -> None:
+    from starter.handoff_bridge.bridge import validate_booking_handoff
+
+    assert validate_booking_handoff({}) is not None
+    assert validate_booking_handoff({"party_size": 12}) is not None
+    assert (
+        validate_booking_handoff(
+            {
+                "venue_id": "royal_oak",
+                "date": "2026-04-25",
+                "time": "19:30",
+                "party_size": 6,
+            }
+        )
+        is None
+    )
+
+
+def test_extract_booking_data_from_tool_handoff_payload() -> None:
+    from sovereign_agent.halves import HalfResult
+
+    from starter.handoff_bridge.bridge import extract_booking_data
+
+    loop_result = HalfResult(
+        success=True,
+        output={},
+        summary="handoff",
+        next_action="handoff_to_structured",
+        handoff_payload={
+            "data": {
+                "venue_id": "royal_oak",
+                "date": "2026-04-25",
+                "time": "19:30",
+                "party_size": 6,
+            }
+        },
+    )
+    data = extract_booking_data(loop_result)
+    assert data["venue_id"] == "royal_oak"
+    assert data["party_size"] == 6
+
+
 def test_build_reverse_task_carries_rejection_reason() -> None:
     from sovereign_agent.halves import HalfResult
 
