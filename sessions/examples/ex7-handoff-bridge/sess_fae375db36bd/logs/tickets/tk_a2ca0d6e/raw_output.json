@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sg_1",
+    "description": "Retrieve venue_id from available data sources or user input",
+    "success_criterion": "venue_id is successfully obtained and stored",
+    "estimated_tool_calls": 1,
+    "depends_on": [],
+    "assigned_half": "loop",
+    "status": "pending"
+  },
+  {
+    "id": "sg_2",
+    "description": "Update proposal with venue_id and re-run normalization process",
+    "success_criterion": "normalization completes without errors",
+    "estimated_tool_calls": 2,
+    "depends_on": [
+      "sg_1"
+    ],
+    "assigned_half": "loop",
+    "status": "pending"
+  }
+]

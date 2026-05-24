@@ -1,0 +1,44 @@
+[
+  {
+    "id": "sg_1",
+    "description": "Research candidate pubs in Haymarket for 12 people on Friday, April 25, 2026 at 19:30.",
+    "success_criterion": "venue_search tool returns a list of candidate pubs meeting date, time, and party size criteria.",
+    "estimated_tool_calls": 1,
+    "depends_on": [],
+    "assigned_half": "loop",
+    "status": "pending"
+  },
+  {
+    "id": "sg_2",
+    "description": "Hand off booking details to structured half for confirmation.",
+    "success_criterion": "Structured half processes booking request and returns response.",
+    "estimated_tool_calls": 1,
+    "depends_on": [
+      "sg_1"
+    ],
+    "assigned_half": "structured",
+    "status": "pending"
+  },
+  {
+    "id": "sg_3",
+    "description": "Research candidate pubs in Haymarket for party size <=8 and deposit <= \u00a3300 on Friday, April 25, 2026 at 19:30.",
+    "success_criterion": "venue_search tool returns a list of candidate pubs meeting party size and deposit policy criteria.",
+    "estimated_tool_calls": 1,
+    "depends_on": [
+      "sg_2"
+    ],
+    "assigned_half": "loop",
+    "status": "pending"
+  },
+  {
+    "id": "sg_4",
+    "description": "Hand off adjusted booking details to structured half for confirmation.",
+    "success_criterion": "Structured half confirms booking for adjusted party size and deposit.",
+    "estimated_tool_calls": 1,
+    "depends_on": [
+      "sg_3"
+    ],
+    "assigned_half": "structured",
+    "status": "pending"
+  }
+]

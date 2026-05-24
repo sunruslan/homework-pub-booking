@@ -1,0 +1,20 @@
+{
+  "ticket_id": "tk_af51065e",
+  "operation": "executor.run_subgoal/sg_2",
+  "started_at": "2026-05-24T11:50:42.697063+00:00",
+  "completed_at": "2026-05-24T11:51:55.199666+00:00",
+  "duration_ms": 72502,
+  "outputs": [
+    {
+      "path": "/Users/sunruslan/Documents/ai-performance-engineering/homework-pub-booking/sessions/examples/ex7-handoff-bridge/sess_710ea14ce8d1/logs/tickets/tk_af51065e/raw_output.json",
+      "sha256": "7ae1921d2fa57de51ea0b61fc4b8b057789c07eb74b9ad862cb4e1015604391d",
+      "size_bytes": 1977,
+      "content_type": "application/json"
+    }
+  ],
+  "metrics": {
+    "tool_calls": 2,
+    "turns_used": 3,
+    "handoff_requested": false
+  }
+}

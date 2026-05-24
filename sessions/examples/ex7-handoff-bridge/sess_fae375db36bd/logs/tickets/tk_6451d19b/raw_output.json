@@ -1,0 +1,84 @@
+{
+  "subgoal_id": "sg_1",
+  "success": true,
+  "final_answer": "(handoff requested)",
+  "tool_calls_made": [
+    {
+      "name": "remind_session_task",
+      "arguments": {},
+      "success": true,
+      "summary": "remind_session_task: loaded SESSION.md for sess_fae375db36bd (54 chars). Follow this task exactly: Book a venue for 12 people in Haymarket, Friday 19:30.",
+      "requires_human_approval": false
+    },
+    {
+      "name": "venue_search",
+      "arguments": {
+        "near": "Haymarket",
+        "party_size": 12
+      },
+      "success": true,
+      "summary": "venue_search(Haymarket, party=12, budget\u2264\u00a31000): 0 results \u2014 venues exist in Haymarket but none fit your constraints. In Haymarket: Haymarket Tap (8 seats, floor \u00a3200; blocked: party_size (max 8 seats)). Relax party_size or raise budget_max_gbp, or pick a different venue from this list.",
+      "requires_human_approval": false
+    },
+    {
+      "name": "handoff_to_structured",
+      "arguments": {
+        "reason": "No venues in Haymarket can accommodate 12 people. Adjust party size or expand search area.",
+        "context": "Venue search for 12 in Haymarket failed due to capacity constraints.",
+        "data": {
+          "search_results": {
+            "near": "Haymarket",
+            "party_size": 12,
+            "results": [],
+            "area_venues": [
+              {
+                "id": "haymarket_tap",
+                "name": "Haymarket Tap",
+                "seats_available_evening": 8,
+                "blocked_by": [
+                  "party_size"
+                ]
+              }
+            ]
+          },
+          "suggested_actions": [
+            "Reduce party size to 8",
+            "Increase budget_max_gbp",
+            "Search in a different area"
+          ]
+        }
+      },
+      "success": true,
+      "summary": "handoff to structured half: No venues in Haymarket can accommodate 12 people. Adjust party size or expand search area.",
+      "requires_human_approval": false
+    }
+  ],
+  "turns_used": 3,
+  "handoff_requested": true,
+  "handoff_payload": {
+    "reason": "No venues in Haymarket can accommodate 12 people. Adjust party size or expand search area.",
+    "context": "Venue search for 12 in Haymarket failed due to capacity constraints.",
+    "data": {
+      "search_results": {
+        "near": "Haymarket",
+        "party_size": 12,
+        "results": [],
+        "area_venues": [
+          {
+            "id": "haymarket_tap",
+            "name": "Haymarket Tap",
+            "seats_available_evening": 8,
+            "blocked_by": [
+              "party_size"
+            ]
+          }
+        ]
+      },
+      "suggested_actions": [
+        "Reduce party size to 8",
+        "Increase budget_max_gbp",
+        "Search in a different area"
+      ]
+    }
+  }
+}

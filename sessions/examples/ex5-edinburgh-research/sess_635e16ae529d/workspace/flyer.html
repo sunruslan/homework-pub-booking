@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Haymarket Tap — Edinburgh booking</title>
+  <style>
+    body { font-family: Georgia, serif; margin: 2rem; color: #1a1a1a; background: #faf8f5; }
+    article { max-width: 36rem; margin: 0 auto; padding: 1.5rem; background: #fff; border: 1px solid #ddd; }
+    h1 { margin-top: 0; color: #2c5282; }
+    dl { display: grid; grid-template-columns: 8rem 1fr; gap: 0.35rem 1rem; }
+    dt { font-weight: bold; }
+    .weather { margin-top: 1rem; padding: 0.75rem; background: #ebf4ff; border-radius: 4px; }
+    .cost { margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <article>
+    <h1 data-testid="title">Haymarket Tap</h1>
+    <dl>
+      <dt>Venue</dt>
+      <dd data-testid="venue_name">Haymarket Tap</dd>
+      <dt>Address</dt>
+      <dd data-testid="venue_address">12 Dalry Rd, Edinburgh EH11 2BG</dd>
+      <dt>Date</dt>
+      <dd data-testid="date">2026-04-25</dd>
+      <dt>Time</dt>
+      <dd data-testid="time">19:30</dd>
+      <dt>Party</dt>
+      <dd data-testid="party_size">6</dd>
+    </dl>
+    <section class="weather">
+      <h2>Weather</h2>
+      <p>
+        <span data-testid="condition">cloudy</span>,
+        <span data-testid="temperature_c">12°C</span>
+      </p>
+    </section>
+    <section class="cost">
+      <h2>Cost</h2>
+      <dl>
+        <dt>Total</dt>
+        <dd data-testid="total_gbp">£540</dd>
+        <dt>Deposit</dt>
+        <dd data-testid="deposit_required_gbp">£0</dd>
+      </dl>
+    </section>
+  </article>
+</body>
+</html>

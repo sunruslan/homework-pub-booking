@@ -1,0 +1,1 @@
+Planner produced 4 subgoals. 2 to loop half, 2 to structured half. Estimated total tool calls: 4.

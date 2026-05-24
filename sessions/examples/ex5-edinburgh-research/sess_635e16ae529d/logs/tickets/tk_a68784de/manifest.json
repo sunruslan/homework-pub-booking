@@ -1,0 +1,21 @@
+{
+  "ticket_id": "tk_a68784de",
+  "operation": "planner.plan",
+  "started_at": "2026-05-24T11:55:58.606161+00:00",
+  "completed_at": "2026-05-24T11:55:58.606480+00:00",
+  "duration_ms": 0,
+  "outputs": [
+    {
+      "path": "/Users/sunruslan/Documents/ai-performance-engineering/homework-pub-booking/sessions/examples/ex5-edinburgh-research/sess_635e16ae529d/logs/tickets/tk_a68784de/raw_output.json",
+      "sha256": "034f9fb068a44fd7cc94bf6f048596234c9f2cb8f247db9449e09483a0ff3170",
+      "size_bytes": 574,
+      "content_type": "application/json"
+    }
+  ],
+  "metrics": {
+    "num_subgoals": 2,
+    "llm_tokens_in": 10,
+    "llm_tokens_out": 10,
+    "llm_model": "fake"
+  }
+}

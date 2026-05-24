@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sg_1",
+    "description": "Search for a venue in Haymarket for 12 people; if not found, try Old Town or reduce party size to 8.",
+    "success_criterion": "A venue is found that accommodates the party size (12 or 8).",
+    "estimated_tool_calls": 1,
+    "depends_on": [],
+    "assigned_half": "loop",
+    "status": "pending"
+  },
+  {
+    "id": "sg_2",
+    "description": "Hand off the booking details to structured for confirmation.",
+    "success_criterion": "handoff_to_structured is successfully called with valid data including venue_id, date, time, party_size, and deposit.",
+    "estimated_tool_calls": 1,
+    "depends_on": [
+      "sg_1"
+    ],
+    "assigned_half": "loop",
+    "status": "pending"
+  }
+]

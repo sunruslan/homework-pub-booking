@@ -1,0 +1,21 @@
+{
+  "ticket_id": "tk_70e67e52",
+  "operation": "planner.plan",
+  "started_at": "2026-05-24T11:13:25.516125+00:00",
+  "completed_at": "2026-05-24T11:13:56.772343+00:00",
+  "duration_ms": 31256,
+  "outputs": [
+    {
+      "path": "/Users/sunruslan/Documents/ai-performance-engineering/homework-pub-booking/sessions/examples/ex7-handoff-bridge/sess_fae375db36bd/logs/tickets/tk_70e67e52/raw_output.json",
+      "sha256": "e87f3352e197918561ff3c51995f5742b3684d7a641177bf2023688fc3698035",
+      "size_bytes": 1466,
+      "content_type": "application/json"
+    }
+  ],
+  "metrics": {
+    "num_subgoals": 4,
+    "llm_tokens_in": 368,
+    "llm_tokens_out": 5320,
+    "llm_model": "Qwen/Qwen3-Next-80B-A3B-Thinking"
+  }
+}

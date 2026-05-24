@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "from_half": "loop",
+  "to_half": "structured",
+  "written_at": "2026-05-24T11:18:04.779635+00:00",
+  "session_id": "sess_fae375db36bd",
+  "reason": "loop-half requested confirmation",
+  "context": "executor requested handoff to structured from sg_1",
+  "data": {
+    "party_size": 12,
+    "area": "Haymarket",
+    "time": "Friday 19:30"
+  },
+  "return_instructions": "If you cannot confirm (party too large, deposit too high, etc.), respond with next_action=escalate and include a human-readable 'reason' in output so the loop half can adapt.",
+  "constraints_reminder": null
+}

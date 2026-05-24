@@ -5,8 +5,22 @@
 .env.*.local
 
 # ── Session artifacts ────────────────────────────────────────────────
-# Sessions contain API output and should not be committed.
-sessions/
+# Ignore sessions by default; Ex9 reflection cites specific dirs (tracked below).
+sessions/*
+!sessions/examples/
+sessions/examples/*
+!sessions/examples/ex5-edinburgh-research/
+sessions/examples/ex5-edinburgh-research/*
+!sessions/examples/ex5-edinburgh-research/sess_635e16ae529d/
+!sessions/examples/ex5-edinburgh-research/sess_635e16ae529d/**
+!sessions/examples/ex7-handoff-bridge/
+sessions/examples/ex7-handoff-bridge/*
+!sessions/examples/ex7-handoff-bridge/sess_710ea14ce8d1/
+!sessions/examples/ex7-handoff-bridge/sess_710ea14ce8d1/**
+!sessions/examples/ex7-handoff-bridge/sess_fae375db36bd/
+!sessions/examples/ex7-handoff-bridge/sess_fae375db36bd/**
+!sessions/examples/ex7-handoff-bridge/sess_23ce0baaa5ca/
+!sessions/examples/ex7-handoff-bridge/sess_23ce0baaa5ca/**
 demo_sessions_*/
 *.session.json
 

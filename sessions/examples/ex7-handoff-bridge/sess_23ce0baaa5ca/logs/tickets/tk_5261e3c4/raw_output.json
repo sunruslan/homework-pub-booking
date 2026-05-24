@@ -1,0 +1,76 @@
+{
+  "subgoal_id": "sg_1",
+  "success": true,
+  "final_answer": "(handoff requested)",
+  "tool_calls_made": [
+    {
+      "name": "venue_search",
+      "arguments": {
+        "near": "Haymarket",
+        "party_size": 12,
+        "budget_max_gbp": 1000
+      },
+      "success": true,
+      "summary": "venue_search(Haymarket, party=12, budget\u2264\u00a31000): 0 results \u2014 venues exist in Haymarket but none fit your constraints. In Haymarket: Haymarket Tap (8 seats, floor \u00a3200; blocked: party_size (max 8 seats)). Relax party_size or raise budget_max_gbp, or pick a different venue from this list.",
+      "requires_human_approval": false
+    },
+    {
+      "name": "handoff_to_structured",
+      "arguments": {
+        "reason": "No Haymarket venue fits 12 \u2014 escalating to structured",
+        "context": "venue_search returned empty results list",
+        "data": {
+          "search_results": {
+            "near": "Haymarket",
+            "party_size": 12,
+            "results": [],
+            "area_venues": [
+              {
+                "id": "haymarket_tap",
+                "name": "Haymarket Tap",
+                "seats_available_evening": 8,
+                "blocked_by": [
+                  "party_size"
+                ]
+              }
+            ]
+          },
+          "suggested_actions": [
+            "Reduce party size to 8",
+            "Search Old Town"
+          ]
+        }
+      },
+      "success": true,
+      "summary": "handoff to structured half: No Haymarket venue fits 12 \u2014 escalating to structured",
+      "requires_human_approval": false
+    }
+  ],
+  "turns_used": 2,
+  "handoff_requested": true,
+  "handoff_payload": {
+    "reason": "No Haymarket venue fits 12 \u2014 escalating to structured",
+    "context": "venue_search returned empty results list",
+    "data": {
+      "search_results": {
+        "near": "Haymarket",
+        "party_size": 12,
+        "results": [],
+        "area_venues": [
+          {
+            "id": "haymarket_tap",
+            "name": "Haymarket Tap",
+            "seats_available_evening": 8,
+            "blocked_by": [
+              "party_size"
+            ]
+          }
+        ]
+      },
+      "suggested_actions": [
+        "Reduce party size to 8",
+        "Search Old Town"
+      ]
+    }
+  }
+}

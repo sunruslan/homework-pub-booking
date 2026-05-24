@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "from_half": "loop",
+  "to_half": "structured",
+  "written_at": "2026-05-24T12:04:13.867068+00:00",
+  "session_id": "sess_23ce0baaa5ca",
+  "reason": "No Haymarket venue fits 12 \u2014 escalating to structured",
+  "context": "venue_search returned empty results list",
+  "data": {
+    "search_results": {
+      "near": "Haymarket",
+      "party_size": 12,
+      "results": [],
+      "area_venues": [
+        {
+          "id": "haymarket_tap",
+          "name": "Haymarket Tap",
+          "seats_available_evening": 8,
+          "blocked_by": [
+            "party_size"
+          ]
+        }
+      ]
+    },
+    "suggested_actions": [
+      "Reduce party size to 8",
+      "Search Old Town"
+    ]
+  },
+  "return_instructions": ""
+}

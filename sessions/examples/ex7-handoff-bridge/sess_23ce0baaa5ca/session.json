@@ -1,0 +1,35 @@
+{
+  "session_id": "sess_23ce0baaa5ca",
+  "version": 1,
+  "created_at": "2026-05-24T12:04:13.836547+00:00",
+  "updated_at": "2026-05-24T12:04:13.869920+00:00",
+  "scenario": "ex7-handoff-bridge",
+  "state": "failed",
+  "user_id": null,
+  "current_half": "loop",
+  "planner": {
+    "subgoals": [
+      {
+        "id": "sg_1",
+        "description": "search Haymarket for 12",
+        "success_criterion": "venue_search ran",
+        "estimated_tool_calls": 2,
+        "depends_on": [],
+        "assigned_half": "loop",
+        "status": "pending"
+      }
+    ]
+  },
+  "executor": {},
+  "structured": {},
+  "memory": {},
+  "handoff_history": [],
+  "bare_mode": false,
+  "config_overrides": {},
+  "result": {
+    "reason": {
+      "reason": "max_rounds=3 exceeded"
+    }
+  },
+  "resumed_from": null
+}

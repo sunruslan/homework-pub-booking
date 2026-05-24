@@ -1,0 +1,20 @@
+{
+  "ticket_id": "tk_d989b18b",
+  "operation": "executor.run_subgoal/sg_1",
+  "started_at": "2026-05-24T11:55:58.608674+00:00",
+  "completed_at": "2026-05-24T11:55:58.610996+00:00",
+  "duration_ms": 2,
+  "outputs": [
+    {
+      "path": "/Users/sunruslan/Documents/ai-performance-engineering/homework-pub-booking/sessions/examples/ex5-edinburgh-research/sess_635e16ae529d/logs/tickets/tk_d989b18b/raw_output.json",
+      "sha256": "7762b52c1d2dcf5db8f1f62fe440284d69722ba81ad07b2fd592a031c5380271",
+      "size_bytes": 1971,
+      "content_type": "application/json"
+    }
+  ],
+  "metrics": {
+    "tool_calls": 5,
+    "turns_used": 4,
+    "handoff_requested": false
+  }
+}

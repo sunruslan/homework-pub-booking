@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sg_1",
+    "description": "Retrieve the maximum allowed party size for the event",
+    "success_criterion": "System has the maximum allowed party size value",
+    "estimated_tool_calls": 1,
+    "depends_on": [],
+    "assigned_half": "loop",
+    "status": "pending"
+  },
+  {
+    "id": "sg_2",
+    "description": "Adjust the party size to be within the allowed limit",
+    "success_criterion": "New party size is confirmed to be at or below the maximum allowed",
+    "estimated_tool_calls": 1,
+    "depends_on": [
+      "sg_1"
+    ],
+    "assigned_half": "loop",
+    "status": "pending"
+  }
+]

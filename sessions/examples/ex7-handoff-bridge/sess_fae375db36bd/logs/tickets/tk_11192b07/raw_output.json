@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sg_1",
+    "description": "Retrieve venue_id using venue name from input data via system database lookup",
+    "success_criterion": "venue_id is successfully retrieved and stored",
+    "estimated_tool_calls": 1,
+    "depends_on": [],
+    "assigned_half": "loop",
+    "status": "pending"
+  },
+  {
+    "id": "sg_2",
+    "description": "Update the proposal with the retrieved venue_id to resolve missing field error",
+    "success_criterion": "proposal now includes valid venue_id",
+    "estimated_tool_calls": 1,
+    "depends_on": [
+      "sg_1"
+    ],
+    "assigned_half": "loop",
+    "status": "pending"
+  }
+]

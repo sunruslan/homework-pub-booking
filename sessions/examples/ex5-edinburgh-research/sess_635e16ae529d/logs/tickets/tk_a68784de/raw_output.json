@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sg_1",
+    "description": "research Edinburgh venues near Haymarket for a party of 6",
+    "success_criterion": "at least one candidate identified",
+    "estimated_tool_calls": 3,
+    "depends_on": [],
+    "assigned_half": "loop",
+    "status": "pending"
+  },
+  {
+    "id": "sg_2",
+    "description": "produce an HTML flyer with the chosen venue, weather, and cost",
+    "success_criterion": "flyer.html written to workspace/",
+    "estimated_tool_calls": 1,
+    "depends_on": [
+      "sg_1"
+    ],
+    "assigned_half": "loop",
+    "status": "pending"
+  }
+]
