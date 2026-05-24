@@ -126,6 +126,7 @@ def fact_appears_in_log(fact: Any, log: list[ToolCallRecord] | None = None) -> b
         return False
 
     if " " in target.strip():
+
         def _scan_substring(obj: Any) -> bool:
             if isinstance(obj, str):
                 hay = _normalise_fact(obj)

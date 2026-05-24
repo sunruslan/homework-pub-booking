@@ -74,9 +74,7 @@ def _venues_in_area(venues: list[dict], near_lower: str) -> list[dict]:
     return [v for v in venues if near_lower in str(v.get("area", "")).lower()]
 
 
-def _filter_by_party_and_budget(
-    venues: list[dict], party: int, budget: int
-) -> list[dict]:
+def _filter_by_party_and_budget(venues: list[dict], party: int, budget: int) -> list[dict]:
     results: list[dict] = []
     for venue in venues:
         seats = venue.get("seats_available_evening", 0)
@@ -726,7 +724,9 @@ def calculate_cost(
             output=output,
         )
 
-    venue_row = next((v for v in venues_raw if isinstance(v, dict) and v.get("id") == venue_key), None)
+    venue_row = next(
+        (v for v in venues_raw if isinstance(v, dict) and v.get("id") == venue_key), None
+    )
     if venue_row is None:
         output = {"error": "venue_not_in_venues_fixture", "venue_id": venue_key}
         record_tool_call("calculate_cost", args, output)
@@ -796,7 +796,11 @@ def generate_flyer(session: Session, event_details: dict) -> ToolResult:
 
     missing = [k for k in _FLYER_REQUIRED_KEYS if k not in event_details]
     if missing:
-        output = {"error": "missing_fields", "missing": missing, "required": list(_FLYER_REQUIRED_KEYS)}
+        output = {
+            "error": "missing_fields",
+            "missing": missing,
+            "required": list(_FLYER_REQUIRED_KEYS),
+        }
         record_tool_call("generate_flyer", args, output)
         return _tool_failure(
             summary=(

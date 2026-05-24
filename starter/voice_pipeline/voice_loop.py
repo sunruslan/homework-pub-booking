@@ -15,7 +15,7 @@ Voice mode degrades gracefully:
 
 from __future__ import annotations
 
-import asyncio
+import importlib.util
 import io
 import os
 import sys
@@ -99,12 +99,13 @@ async def run_voice_mode(session: Session, persona: ManagerPersona, max_turns: i
         await run_text_mode(session, persona, max_turns=max_turns)
         return
 
-    try:
-        import httpx  # type: ignore[import-not-found]
-        import sounddevice as sd  # type: ignore[import-not-found]
-    except ImportError as e:
+    missing_dep = next(
+        (name for name in ("httpx", "sounddevice") if importlib.util.find_spec(name) is None),
+        None,
+    )
+    if missing_dep:
         print(
-            f"⚠  Missing voice dep: {e.name}. Run:\n"
+            f"⚠  Missing voice dep: {missing_dep}. Run:\n"
             "     make setup-voice\n"
             "   or: uv sync --extra voice\n"
             "   Falling back to text mode.",
@@ -112,6 +113,8 @@ async def run_voice_mode(session: Session, persona: ManagerPersona, max_turns: i
         )
         await run_text_mode(session, persona, max_turns=max_turns)
         return
+
+    import sounddevice as sd  # type: ignore[import-not-found]
 
     voice_id = os.environ.get("ELEVENLABS_VOICE_ID", DEFAULT_VOICE_ID).strip() or DEFAULT_VOICE_ID
 
